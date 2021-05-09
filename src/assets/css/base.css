@@ -1,0 +1,11 @@
+@import "./commonBg.css";
+
+.wrap-v1 {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.wrap-v2 {
+  width: 980px;
+  margin: 0 auto;
+}
