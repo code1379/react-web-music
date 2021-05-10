@@ -36,17 +36,37 @@ export const Top = styled.div`
     .top-nav {
       display: flex;
       .nav-item {
+        display: block;
+        position: relative;
+        text-decoration: none;
+        color: #ccc;
         padding: 0 19px;
         line-height: 70px;
         cursor: pointer;
-        &:hover {
+        &:hover,
+        &.active {
           color: #fff;
           background-color: #000;
+        }
+        &.active {
+          &::before {
+            content: '箭头';
+            text-indent: -9999px;
+            position: absolute;
+            width: 12px;
+            height: 7px;
+            background-image: url(${bgImg});
+            background-position: -226px 0px;
+            bottom: -2px;
+            transform: translateX(-50%);
+            left: 50%;
+          }
         }
       }
       /* 最后一个元素 */
       .nav-item:last-child {
-        position: relative;
+        display: block;
+        position: relative !important;
         &::after {
           display: inline-block;
           content: '';
