@@ -1,11 +1,16 @@
 import React, { memo, useEffect } from 'react';
-import { getBanner } from 'service/recommend';
+import { useDispatch } from 'react-redux';
+
+// import { getBanner } from 'service/recommend';
+import { actions } from './store';
 
 export default memo(function Recommend() {
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    getBanner().then(res => {
-      console.log(res)
-    })
-  }, [])
-  return <div style={{ minHeight: 800 }}>推荐页面</div>;
+    dispatch(actions.getBannersAction())
+  }, [dispatch]);
+  return <div style={{ minHeight: 800 }}>
+    
+  </div>;
 });
