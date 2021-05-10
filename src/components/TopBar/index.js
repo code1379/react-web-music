@@ -29,7 +29,6 @@ export default memo(function TopBar() {
           */}
           <nav className='top-nav'>
             {headerLinks.map((item, index) => {
-              console.log(item.link.indexOf('http'));
               if (item.link.indexOf("http") === -1) {
                 return (
                   <NavLink

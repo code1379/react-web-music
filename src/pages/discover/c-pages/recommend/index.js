@@ -1,5 +1,11 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
+import { getBanner } from 'service/recommend';
 
 export default memo(function Recommend() {
-  return <div>推荐页面</div>;
+  useEffect(() => {
+    getBanner().then(res => {
+      console.log(res)
+    })
+  }, [])
+  return <div style={{ minHeight: 800 }}>推荐页面</div>;
 });
