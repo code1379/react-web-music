@@ -2,13 +2,16 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 
+:root {
+	font-size: 12px;
+}
 
 body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 a {
 	text-decoration: none;
-	color: #ccc;
+	color: #666;
 }
 
 html, body, div, span, applet, object, iframe,

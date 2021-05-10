@@ -2,3 +2,13 @@
   background: url(../images/topbar.png) no-repeat;
   background-position: 0 9999px;
 }
+
+.bottom-logo {
+  background: url(../images/foot.png) no-repeat;
+  background-position: 0 9999px;
+}
+
+.bottom-tt {
+  background: url(../images/foot_tt.png) no-repeat;
+  background-position: 0 9999px;
+}
