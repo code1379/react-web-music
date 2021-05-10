@@ -17,7 +17,7 @@ export const TopNav = styled.div`
       margin: 2px 17px 0;
       color: #fff;
       font-size: 12px;
-      &.active {
+      &.active, &:hover {
         background-color: rgb(155, 9, 9);
         border-radius: 20px;
       }

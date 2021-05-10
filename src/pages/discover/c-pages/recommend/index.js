@@ -4,13 +4,19 @@ import { useDispatch } from 'react-redux';
 // import { getBanner } from 'service/recommend';
 import { actions } from './store';
 
+import { RecommendWrapper } from './style';
+import Swiper from './c-cpns/Swiper'
+
 export default memo(function Recommend() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actions.getBannersAction())
+    dispatch(actions.getBannersAction());
   }, [dispatch]);
-  return <div style={{ minHeight: 800 }}>
-    
-  </div>;
+  return (
+    <RecommendWrapper style={{ minHeight: 800 }}>
+
+      <Swiper/>
+    </RecommendWrapper>
+  );
 });
