@@ -32,7 +32,7 @@ export default memo(function Rank() {
                 <li className='track' key={track.name}>
                   <div className="left">
                     <span className={index < 3 ? 'index top' : 'index'}>{index + 1}</span>
-                    <a className='name text-nowrap'>{track.name}</a>
+                    <div className='name text-nowrap'>{track.name}</div>
                   </div>
                   <div className='controller-wrapper'>
                     <div className='controller'>
