@@ -2,7 +2,8 @@ import { Map } from 'immutable';
 import * as constants from './constants'
 const defaultState = Map({
   banners: [],
-  hotRecommends: []
+  hotRecommends: [],
+  newAlbums: [],
 })
 
 export const reducer = (state = defaultState, action) => {
@@ -11,6 +12,8 @@ export const reducer = (state = defaultState, action) => {
       return state.set("banners", action.banners)
     case constants.CHANGE_HOT_RECOMMEND: 
       return state.set('hotRecommends', action.recommends);
+    case constants.CHANGE_NEW_ALBUM: 
+      return state.set("newAlbums", action.albums);
     default: 
       return state
   }

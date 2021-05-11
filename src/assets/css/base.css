@@ -14,3 +14,9 @@
 body {
   background-color: #f5f5f5;
 }
+
+.text-nowrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

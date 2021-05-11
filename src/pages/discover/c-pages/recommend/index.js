@@ -7,6 +7,8 @@ import { actions } from './store';
 import { RecommendWrapper, Content, RightContent, LeftContent } from './style';
 import Swiper from './c-cpns/Swiper';
 import HotRecommend from './c-cpns/HotRecommend'
+import NewAlbum from './c-cpns/NewAlbum'
+import Rank from './c-cpns/Rank'
 
 export default memo(function Recommend() {
   const dispatch = useDispatch();
@@ -14,6 +16,7 @@ export default memo(function Recommend() {
   useEffect(() => {
     dispatch(actions.getBannersAction());
     dispatch(actions.getHotRecommendAction());
+    dispatch(actions.getNewAlbumAction());
   }, [dispatch]);
   
   return (
@@ -23,6 +26,8 @@ export default memo(function Recommend() {
         <LeftContent>
           {/* <CommonHeader /> */}
           <HotRecommend/>
+          <NewAlbum/>
+          <Rank/>
         </LeftContent>
         <RightContent>r</RightContent>
       </Content>

@@ -1,4 +1,4 @@
-import React, { memo, useRef, useState } from 'react';
+import React, { memo, useCallback, useRef, useState } from 'react';
 
 import { Carousel } from 'antd';
 import { SwiperWrapper, Content, Download } from './style';
@@ -10,10 +10,13 @@ export default memo(function Swiper() {
   const carousel = useRef(null);
   // redux
   const banners = useSelector((state) => state.getIn(['recommend', 'banners']));
+
+  
   // func
-  const handleBeforeChange = (from, to) => {
+  const handleBeforeChange = useCallback((from, to) => {
     setCurrentIndex(to);
-  };
+  }, []);
+  
   const handlePrev = (e) => {
     e.preventDefault();
     carousel.current.prev();

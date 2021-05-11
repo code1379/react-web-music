@@ -1,5 +1,5 @@
 import * as constants from './constants';
-import { getBanner, getHotRecommend } from '@/service/recommend';
+import { getBanner, getHotRecommend, getNewAlbum } from '@/service/recommend';
 
 const changeBannerAction = (banners) => ({
   type: constants.CHANGE_BANNERS,
@@ -23,6 +23,19 @@ export const getHotRecommendAction = () => {
   return (dispatch) => {
     getHotRecommend().then((res) => {
       dispatch(changeHotRecommendAction(res.result));
+    });
+  };
+};
+
+const changeNewAlbumAction = (albums) => ({
+  type: constants.CHANGE_NEW_ALBUM,
+  albums
+});
+
+export const getNewAlbumAction = () => {
+  return (dispatch) => {
+    getNewAlbum(0, 10).then((res) => {
+      dispatch(changeNewAlbumAction(res.albums));
     });
   };
 };
