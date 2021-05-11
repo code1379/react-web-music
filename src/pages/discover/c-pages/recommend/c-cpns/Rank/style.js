@@ -71,11 +71,15 @@ export const Content = styled.div`
         .name {
           line-height: 32px;
           display: inline-block;
-          &:hover {
+          /* :hover {
             width: 96px;
-          }
+          } */
         }
         &:hover {
+          /*  */
+          .name {
+            width : 96px;
+          }
           .controller-wrapper {
             display: block;
           }
