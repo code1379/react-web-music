@@ -21,3 +21,18 @@
   background: url(../images/banner.png) no-repeat;
   background-position: 0 9999px;
 }
+
+.index-spirit {
+  background: url(../images/index.png) no-repeat;
+  background-position: 0 9999px;
+}
+
+.coverall-spirit {
+  background: url(../images/coverall.png) no-repeat;
+  background-position: 0 9999px;
+}
+
+.iconall-spirit {
+  background: url(../images/iconall.png) no-repeat;
+  background-position: 0 9999px;
+}
