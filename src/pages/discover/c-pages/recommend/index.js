@@ -17,6 +17,7 @@ export default memo(function Recommend() {
     dispatch(actions.getBannersAction());
     dispatch(actions.getHotRecommendAction());
     dispatch(actions.getNewAlbumAction());
+    dispatch(actions.getRankAction())
   }, [dispatch]);
   
   return (

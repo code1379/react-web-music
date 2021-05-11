@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif !important;
 }
 a {
 	text-decoration: none;

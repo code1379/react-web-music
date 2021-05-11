@@ -11,12 +11,11 @@ export default memo(function Swiper() {
   // redux
   const banners = useSelector((state) => state.getIn(['recommend', 'banners']));
 
-  
   // func
   const handleBeforeChange = useCallback((from, to) => {
     setCurrentIndex(to);
   }, []);
-  
+
   const handlePrev = (e) => {
     e.preventDefault();
     carousel.current.prev();
@@ -43,7 +42,7 @@ export default memo(function Swiper() {
           dots={{ className: 'dots' }}
           beforeChange={(from, to) => handleBeforeChange(from, to)}
         >
-          {banners &&
+          {banners.length &&
             banners.map((banner) => (
               <div key={banner.targetId} className='banner'>
                 <a href={banner.url} target='_blank' rel='noreferrer'>

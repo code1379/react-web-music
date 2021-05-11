@@ -19,3 +19,11 @@ export const getNewAlbum = (offset, limit) => {
     }
   });
 };
+
+export const getRankById =(id) => {
+  return request.get('/top/list', {
+    params: {
+      id
+    }
+  });
+}
