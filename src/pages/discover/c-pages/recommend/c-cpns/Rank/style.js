@@ -10,7 +10,7 @@ export const Content = styled.div`
   background: url(${indexBill}) no-repeat;
   height: 472px;
   .bill {
-    flex: 1;
+    width: 230px;
     .bill-info {
       display: flex;
       margin: 20px 0 20px 20px;
@@ -49,6 +49,7 @@ export const Content = styled.div`
       .track {
         height: 32px;
         display: flex;
+        position: relative;
         justify-content: space-between;
         align-items: center;
         box-sizing: border-box;
@@ -83,7 +84,9 @@ export const Content = styled.div`
           display: none;
         }
         .controller {
+          width: 82px;
           display: flex;
+          height: 32px;
           align-items: center;
           .btn {
             width: 17px;
