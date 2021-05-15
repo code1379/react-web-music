@@ -6,9 +6,13 @@ import { actions } from './store';
 // import CommonHeader from '@/components/CommonHeader';
 import { RecommendWrapper, Content, RightContent, LeftContent } from './style';
 import Swiper from './c-cpns/Swiper';
-import HotRecommend from './c-cpns/HotRecommend'
-import NewAlbum from './c-cpns/NewAlbum'
-import Rank from './c-cpns/Rank'
+// 左侧
+import HotRecommend from './c-cpns/HotRecommend';
+import NewAlbum from './c-cpns/NewAlbum';
+import Rank from './c-cpns/Rank';
+
+// 右侧
+import UserLogin from './c-cpns/UserLogin';
 
 export default memo(function Recommend() {
   const dispatch = useDispatch();
@@ -17,20 +21,22 @@ export default memo(function Recommend() {
     dispatch(actions.getBannersAction());
     dispatch(actions.getHotRecommendAction());
     dispatch(actions.getNewAlbumAction());
-    dispatch(actions.getRankAction())
+    dispatch(actions.getRankAction());
   }, [dispatch]);
-  
+
   return (
     <RecommendWrapper style={{ minHeight: 800 }}>
       <Swiper />
       <Content className='wrap-v2'>
         <LeftContent>
           {/* <CommonHeader /> */}
-          <HotRecommend/>
-          <NewAlbum/>
-          <Rank/>
+          <HotRecommend />
+          <NewAlbum />
+          <Rank />
         </LeftContent>
-        <RightContent>r</RightContent>
+        <RightContent>
+          <UserLogin />
+        </RightContent>
       </Content>
     </RecommendWrapper>
   );
