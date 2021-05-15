@@ -14,6 +14,7 @@ import Rank from './c-cpns/Rank';
 // 右侧
 import UserLogin from './c-cpns/UserLogin';
 import SettleSinger from './c-cpns/SettleSinger';
+import HotAnchor from './c-cpns/HotAnchor';
 
 export default memo(function Recommend() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export default memo(function Recommend() {
     dispatch(actions.getNewAlbumAction());
     dispatch(actions.getRankAction());
     dispatch(actions.getHotSingersByIdAction());
+    dispatch(actions.getHotAnchorsAction());
   }, [dispatch]);
 
   return (
@@ -38,7 +40,8 @@ export default memo(function Recommend() {
         </LeftContent>
         <RightContent>
           <UserLogin />
-          <SettleSinger/>
+          <SettleSinger />
+          <HotAnchor />
         </RightContent>
       </Content>
     </RecommendWrapper>

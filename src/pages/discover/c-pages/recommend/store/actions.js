@@ -1,6 +1,5 @@
 import * as constants from './constants';
-import { getBanner, getHotRecommend, getNewAlbum, getHotSingersById } from '@/service/recommend';
-import { getRankById } from '../../../../../service/recommend';
+import * as services from '@/service/recommend';
 
 const changeBannerAction = (banners) => ({
   type: constants.CHANGE_BANNERS,
@@ -9,7 +8,7 @@ const changeBannerAction = (banners) => ({
 
 export const getBannersAction = () => {
   return (dispatch) => {
-    getBanner().then((res) => {
+    services.getBanner().then((res) => {
       dispatch(changeBannerAction(res.banners));
     });
   };
@@ -22,7 +21,7 @@ const changeHotRecommendAction = (recommends) => ({
 
 export const getHotRecommendAction = () => {
   return (dispatch) => {
-    getHotRecommend().then((res) => {
+    services.getHotRecommend().then((res) => {
       dispatch(changeHotRecommendAction(res.result));
     });
   };
@@ -35,7 +34,7 @@ const changeNewAlbumAction = (albums) => ({
 
 export const getNewAlbumAction = () => {
   return (dispatch) => {
-    getNewAlbum(0, 10).then((res) => {
+    services.getNewAlbum(0, 10).then((res) => {
       dispatch(changeNewAlbumAction(res.albums));
     });
   };
@@ -51,12 +50,11 @@ const changeRankListAction = (rankList) => ({
 
 export const getRankAction = () => {
   return (dispatch) => {
-    const rankList = []
+    const rankList = [];
     // 飙升榜
-    Promise.all(rankIdList.map((id) => getRankById(id))).then(([a, b, c]) => {
-
-      rankList.push(a.playlist, b.playlist, c.playlist)
-      dispatch(changeRankListAction(rankList))
+    Promise.all(rankIdList.map((id) => services.getRankById(id))).then(([a, b, c]) => {
+      rankList.push(a.playlist, b.playlist, c.playlist);
+      dispatch(changeRankListAction(rankList));
     });
   };
 };
@@ -68,10 +66,23 @@ const changeHotSingersAction = (hotSingers) => ({
 });
 
 export const getHotSingersByIdAction = (id) => {
-  return dispatch => {
-    getHotSingersById(id).then(res => {
-      console.log(res)
+  return (dispatch) => {
+    services.getHotSingersById(id).then((res) => {
+      console.log(res);
       dispatch(changeHotSingersAction(res.list.artists));
-    })
-  }
-}
+    });
+  };
+};
+
+// 热门主播
+const changeHotAnchors = (hotAnchors) => ({
+  type: constants.CHANGE_HOT_ANCHOR,
+  hotAnchors
+});
+export const getHotAnchorsAction = (limit) => {
+  return (dispatch) => {
+    services.getHotAnchers(limit).then((res) => {
+      dispatch(changeHotAnchors(res.data.list));
+    });
+  };
+};

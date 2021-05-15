@@ -38,3 +38,12 @@ export const getHotSingersById = (id = 1) => {
     }
   });
 };
+
+// 获取热门主播
+export const getHotAnchers = (limit = 30) => {
+  return request.get('/dj/toplist/popular', {
+    params: { limit }
+  });
+};
+
+

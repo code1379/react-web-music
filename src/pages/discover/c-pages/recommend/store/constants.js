@@ -3,3 +3,4 @@ export const CHANGE_HOT_RECOMMEND = 'recommend/CHANGE_HOT_RECOMMEND';
 export const CHANGE_NEW_ALBUM = 'recommend/CHANGE_NEW_ALBUM';
 export const CHANGE_RANK_LIST = 'recommend/CHANGE_RANK_LIST';
 export const CHANGE_HOT_SINGER = 'recommend/CHANGE_HOT_SINGER'
+export const CHANGE_HOT_ANCHOR = 'recommend/CHANGE_HOT_ANCHOR';
