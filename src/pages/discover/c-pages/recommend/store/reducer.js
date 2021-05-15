@@ -4,8 +4,9 @@ const defaultState = Map({
   banners: [],
   hotRecommends: [],
   newAlbums: [],
-  rankList: []
-})
+  rankList: [],
+  hotSingers: []
+});
 
 export const reducer = (state = defaultState, action) => {
   switch(action.type) {
@@ -17,6 +18,8 @@ export const reducer = (state = defaultState, action) => {
       return state.set("newAlbums", action.albums);
     case constants.CHANGE_RANK_LIST:
       return state.set("rankList", action.rankList)
+    case constants.CHANGE_HOT_SINGER:
+      return state.set('hotSingers', action.hotSingers);
     default: 
       return state
   }

@@ -20,10 +20,21 @@ export const getNewAlbum = (offset, limit) => {
   });
 };
 
-export const getRankById =(id) => {
+//
+export const getRankById = (id) => {
   return request.get('/top/list', {
     params: {
       id
     }
   });
-}
+};
+
+// 获取热门歌手（入驻歌手信息找不到）
+
+export const getHotSingersById = (id = 1) => {
+  return request.get('/toplist/artist', {
+    params: {
+      id
+    }
+  });
+};

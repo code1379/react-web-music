@@ -1,5 +1,5 @@
 import * as constants from './constants';
-import { getBanner, getHotRecommend, getNewAlbum } from '@/service/recommend';
+import { getBanner, getHotRecommend, getNewAlbum, getHotSingersById } from '@/service/recommend';
 import { getRankById } from '../../../../../service/recommend';
 
 const changeBannerAction = (banners) => ({
@@ -60,3 +60,18 @@ export const getRankAction = () => {
     });
   };
 };
+
+// 歌手榜
+const changeHotSingersAction = (hotSingers) => ({
+  type: constants.CHANGE_HOT_SINGER,
+  hotSingers
+});
+
+export const getHotSingersByIdAction = (id) => {
+  return dispatch => {
+    getHotSingersById(id).then(res => {
+      console.log(res)
+      dispatch(changeHotSingersAction(res.list.artists));
+    })
+  }
+}
