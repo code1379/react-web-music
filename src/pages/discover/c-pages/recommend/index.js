@@ -16,9 +16,11 @@ import UserLogin from './c-cpns/UserLogin';
 import SettleSinger from './c-cpns/SettleSinger';
 import HotAnchor from './c-cpns/HotAnchor';
 
+// Link 跳转
 export default memo(function Recommend() {
-  const dispatch = useDispatch();
 
+  // ! 这里的 action 应该放到每个子组件中
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actions.getBannersAction());
     dispatch(actions.getHotRecommendAction());
@@ -27,6 +29,7 @@ export default memo(function Recommend() {
     dispatch(actions.getHotSingersByIdAction());
     dispatch(actions.getHotAnchorsAction());
   }, [dispatch]);
+
 
   return (
     <RecommendWrapper style={{ minHeight: 800 }}>

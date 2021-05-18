@@ -11,8 +11,8 @@ export default memo(function HotAnchor() {
         <div className='title'>热门主播</div>
       </HeaderWrapper>
       <div className='dj-list'>
-        {anchors.slice(0, 5).map((dj) => (
-          <div className='dj'>
+        {anchors.slice(0, 5).map((dj, index) => (
+          <div className='dj' key={index}>
             <img src={getSizedImage(dj.avatarUrl, 40)} alt='' />
             <div className='info'>
               <div className='name'>{dj.nickName}</div>

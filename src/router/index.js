@@ -5,6 +5,7 @@ import Songs from '@/pages/discover/c-pages/songs';
 import Anchor from '@/pages/discover/c-pages/anchor';
 import Singer from '@/pages/discover/c-pages/singer';
 import Album from '@/pages/discover/c-pages/album';
+import SongDetail from '@/pages/discover/c-pages/song-detail'
 
 import Mine from '@/pages/mine';
 import Friend from '@/pages/friend';
@@ -46,7 +47,11 @@ const routes = [
       },
       {
         path: '/discover/album',
-        component: Album
+        component: Album  
+      },
+      {
+        path: "/discover/song",
+        component: SongDetail
       }
     ]
   },

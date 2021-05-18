@@ -93,6 +93,7 @@ export const Content = styled.div`
           height: 32px;
           align-items: center;
           .btn {
+            cursor: pointer;
             width: 17px;
             height: 17px;
             margin-right: 10px;
