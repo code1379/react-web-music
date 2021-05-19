@@ -63,14 +63,33 @@ export const PlayListWrapper = styled.div`
     position: relative;
     z-index: 3;
     height: 260px;
-    position: relative;
     .msk {
       position: absolute;
+      top: 0;
+      left: 0;
       background-color: #121212;
       height: 260px;
       width: 558px;
       z-index: 2;
       opacity: 0.5;
+    }
+    .songs {
+      height: 260px;
+      position: relative;
+      z-index: 2;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      &::-webkit-scrollbar {
+        width: 6px;
+        background-color: #000;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #868686;
+        border: 1px solid #a6a6a6;
+        width: 4px;
+        border-radius: 5px;
+        opacity: 0.2;
+      }
     }
     .song {
       display: flex;
@@ -113,13 +132,13 @@ export const LyricWrapper = styled.div`
     overflow: hidden;
   }
   .lyrics {
-    transition: all .7s linear;
+    transition: all 0.7s linear;
     .line {
-      &.active{
+      &.active {
         font-size: 14px;
         color: #fff;
       }
-      transition: color .7s linear;
+      transition: color 0.7s linear;
       line-height: 32px;
       color: #989898;
       text-align: center;

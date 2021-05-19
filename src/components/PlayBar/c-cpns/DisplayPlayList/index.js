@@ -33,15 +33,20 @@ export default memo(function DisplayPlayList() {
       const index = lyricParser.getIndex(e.target.currentTime * 1000);
       if (index !== currentIndex) {
         setCurrentIndex(index - 1);
+
+        console.log(index);
         const afterRows = 4;
+        // 第五行开始滚动
         if (index >= afterRows + 1) {
+          const offset = -32 * (index - afterRows);
+          console.log(offset);
           setStyle({
-            transform: `translateY( ${-34 * (index - afterRows)}px)`
+            transform: `translateY( ${offset}px)`
           });
         } else {
-           setStyle({
-             transform: `translateY(0px)`
-           });
+          setStyle({
+            transform: `translateY(0px)`
+          });
         }
       }
     };
@@ -49,9 +54,11 @@ export default memo(function DisplayPlayList() {
       audioRef.addEventListener('timeupdate', fn);
     }
     return () => {
-      audioRef.removeEventListener('timeupdate', fn);
+      if (audioRef) {
+        audioRef.removeEventListener('timeupdate', fn);
+      }
     };
-  }, [audioRef, currentIndex]);
+  }, [audioRef, currentIndex, lyricParser]);
   return (
     <DisplayPlayListWrapper>
       <ListHeader></ListHeader>
@@ -72,15 +79,17 @@ export default memo(function DisplayPlayList() {
           </div>
           <div className='list'>
             <div className='msk'></div>
-            {list.map((song) => (
-              <div className='song' key={song.id}>
-                <div className='name text-nowrap'>{song.name}</div>
-                <div className='right'>
-                  <div className='singer text-nowrap'>{song.ar[0].name}</div>
-                  <div className='time'>{getFormatTime(song.dt / 1000)}</div>
+            <div className='songs'>
+              {list.map((song) => (
+                <div className='song' key={song.id}>
+                  <div className='name text-nowrap'>{song.name}</div>
+                  <div className='right'>
+                    <div className='singer text-nowrap'>{song.ar[0].name}</div>
+                    <div className='time'>{getFormatTime(song.dt / 1000)}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </PlayListWrapper>
         <LyricWrapper>
@@ -92,7 +101,7 @@ export default memo(function DisplayPlayList() {
                   className={index === currentIndex ? 'active line' : 'line'}
                   key={line.time}
                 >
-                  {line.txt}
+                  {line.txt === "" ? "　": line.txt}
                 </div>
               ))}
             </div>

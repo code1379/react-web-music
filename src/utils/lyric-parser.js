@@ -38,6 +38,7 @@ export default class LyricParser {
       return a.time - b.time;
     });
 
+    console.log(this.lines)
   }
 
   _findCurLine(time) {
