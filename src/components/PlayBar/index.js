@@ -114,9 +114,9 @@ export default memo(function PlayBar() {
   };
 
   const handleNext = (e) => {
-    console.log("next")
-  }
-  
+    console.log('next');
+  };
+
   const handleEnded = (e) => {
     console.log('handleEnded');
     console.log(e.target.currentTime);
@@ -131,10 +131,11 @@ export default memo(function PlayBar() {
       show={isShow}
       locked={!isLocked}
       onMouseEnter={() => {
+        console.log(timer);
         clearTimeout(timer);
-        setIsShow(!isShow);
+        setIsShow(true);
       }}
-      onMouseLeave={() => setIsShow(!isShow)}
+      onMouseLeave={() => setIsShow(false)}
     >
       <div
         className='hand'
