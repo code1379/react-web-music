@@ -18,6 +18,11 @@ const addSongDetailToPlayList = (songDetail) => ({
   songDetail
 });
 
+const changeLyric = (lyric) => ({
+  type: constants.CHANGE_LYRIC,
+  lyric
+});
+
 export const playAction = (id) => {
   return (dispatch, getState) => {
     // TODO 用户点击 id 之后，判断 是否在 playList 中
@@ -26,9 +31,9 @@ export const playAction = (id) => {
     const currentSongId = getState().getIn(['playbar', 'currentSongId']);
     const audioRef = getState().getIn(['playbar', 'audioRef']);
 
-    if(id === currentSongId) {
-      audioRef.currentTime = 0
-      return 
+    if (id === currentSongId) {
+      audioRef.currentTime = 0;
+      return;
     }
     const index = playList.findIndex((item) => item.id === id);
     console.log(index);
@@ -42,13 +47,14 @@ export const playAction = (id) => {
         dispatch(addSongDetailToPlayList(songDetail));
         dispatch(changeCurrentDetail(songDetail));
       });
-      services.getLyricById(id).then((res) => {
-        console.log(res);
-      });
     } else {
       const songDetail = playList.find((item) => item.id === id);
       dispatch(changeCurrentDetail(songDetail));
     }
+    services.getLyricById(id).then((res) => {
+      const lrc = res.lrc.lyric;
+      dispatch(changeLyric(lrc))
+    });
     dispatch(changeCurrentSongId(id));
   };
 };

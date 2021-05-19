@@ -1,16 +1,16 @@
 // 参考 https://github.com/ustbhuangyi/lyric-parser/blob/master/src/index.js
 const getTime = (timeStr) => {
-  console.log(timeStr)
+  // console.log(timeStr)
   const [minutes, seconds] = timeStr.split(':');
-  console.log(typeof minutes, typeof seconds, minutes, seconds)
-  console.log(minutes * 60000 + seconds * 1000);
+  // console.log(typeof minutes, typeof seconds, minutes, seconds)
+  // console.log(minutes * 60000 + seconds * 1000);
   return minutes * 60000 + seconds * 1000;
 };
 
 export default class LyricParser {
   constructor(lrc) {
     this.lrc = lrc;
-    this.lines = [];
+    this.lines = []; 
     // 当前索引
     this.curLine = 0;
     // 执行逻辑
@@ -38,7 +38,6 @@ export default class LyricParser {
       return a.time - b.time;
     });
 
-    console.log(this.lines)
   }
 
   _findCurLine(time) {
@@ -47,5 +46,9 @@ export default class LyricParser {
         return i
       }
     }
+  }
+
+  getIndex(time) {
+    return this._findCurLine(time);
   }
 }

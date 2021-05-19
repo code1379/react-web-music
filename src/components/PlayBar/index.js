@@ -9,6 +9,8 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { actions } from './store';
 import { useEffect } from 'react';
 
+import DisplayPlayList from './c-cpns/DisplayPlayList'
+
 export default memo(function PlayBar() {
   const [isInit, setInit] = useState(true);
   const [isShow, setIsShow] = useState(false);
@@ -22,11 +24,12 @@ export default memo(function PlayBar() {
   const sliderRef = useRef(null);
   const [timer, setTimer] = useState(null);
 
-  const { id, detail, list } = useSelector(
+  const { id, detail, list, pattern } = useSelector(
     (state) => ({
       id: state.getIn(['playbar', 'currentSongId']),
       detail: state.getIn(['playbar', 'currentSongDetail']),
-      list: state.getIn(['playbar', 'playList'])
+      list: state.getIn(['playbar', 'playList']),
+      pattern: state.getIn(['playbar', 'pattern'])
     }),
     shallowEqual
   );
@@ -54,25 +57,26 @@ export default memo(function PlayBar() {
           .then((_) => {
             // Automatic playback started!
             // Show playing UI.
-            console.log('audio played auto');
+            // console.log('audio played auto');
           })
           .catch((error) => {
             // Auto-play was prevented
             // Show paused UI.
-            console.log('playback prevented');
+            // console.log('playback prevented');
           });
       }
     }
   }, [id]);
 
   const handlePlay = () => {
+    // console.log("play", id)
     if (id !== -1) {
       if (!playStat) {
-        console.log('play');
+        // console.log('play');
         audioRef.current.play();
         setPlayStat(true);
       } else {
-        console.log('pause');
+        // console.log('pause');
         audioRef.current.pause();
         setPlayStat(false);
       }
@@ -104,7 +108,7 @@ export default memo(function PlayBar() {
   const handleSliderAfterChange = (e) => {
     console.log('handleSliderAfterChange', e);
     audioRef.current.currentTime = (duration * e) / 100;
-    console.log(sliderRef.current);
+    // console.log(sliderRef.current);
     sliderRef.current.blur();
     setBtnPress(false);
     if (!playStat) {
@@ -115,15 +119,37 @@ export default memo(function PlayBar() {
 
   const handleNext = (e) => {
     console.log('next');
+    switch (pattern) {
+      // 顺序播放
+      case 0:
+        const index = list.findIndex((item) => item.id === id);
+        let nextIndex = index + 1;
+        if (nextIndex === list.length) {
+          nextIndex = 0;
+        }
+        
+        dispatch(actions.playAction(list[nextIndex].id));
+        break;
+      // 随机播放
+      case 1:
+        const length = list.length;
+        const randomIndex = Math.floor(Math.random(0, length) * length);
+        dispatch(actions.playAction(list[randomIndex].id));
+        break;
+      // 单曲循环
+      default:
+        e.target.currentTime = 0;
+        e.target.play();
+        // console.log(e.target.currentTime);
+        setCurrentTime(0);
+        return;
+    }
   };
 
   const handleEnded = (e) => {
-    console.log('handleEnded');
-    console.log(e.target.currentTime);
-    e.target.currentTime = 0;
-    e.target.play();
-    console.log(e.target.currentTime);
-    setCurrentTime(0);
+    // console.log('handleEnded');
+    // console.log(e.target.currentTime);
+    handleNext()
   };
 
   return (
@@ -131,12 +157,14 @@ export default memo(function PlayBar() {
       show={isShow}
       locked={!isLocked}
       onMouseEnter={() => {
-        console.log(timer);
-        clearTimeout(timer);
+        if (timer) {
+          clearTimeout(timer);
+        }
         setIsShow(true);
       }}
       onMouseLeave={() => setIsShow(false)}
     >
+      <DisplayPlayList/>
       <div
         className='hand'
         // onClick={() => setIsShow(!isShow)}
@@ -170,7 +198,7 @@ export default memo(function PlayBar() {
             }
             onClick={handlePlay}
           ></div>
-          <div className='next btn playbar-spirit'></div>
+          <div className='next btn playbar-spirit' onClick={(e)=> handleNext(e)}></div>
         </div>
 
         <div className='play-info'>
