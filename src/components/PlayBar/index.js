@@ -9,7 +9,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { actions } from './store';
 import { useEffect } from 'react';
 
-import DisplayPlayList from './c-cpns/DisplayPlayList'
+import DisplayPlayList from './c-cpns/DisplayPlayList';
 
 export default memo(function PlayBar() {
   const [isInit, setInit] = useState(true);
@@ -23,7 +23,7 @@ export default memo(function PlayBar() {
   const audioRef = useRef(null);
   const sliderRef = useRef(null);
   const [timer, setTimer] = useState(null);
-
+  const [showList, setShowList] = useState(false);
   const { id, detail, list, pattern } = useSelector(
     (state) => ({
       id: state.getIn(['playbar', 'currentSongId']),
@@ -127,7 +127,7 @@ export default memo(function PlayBar() {
         if (nextIndex === list.length) {
           nextIndex = 0;
         }
-        
+
         dispatch(actions.playAction(list[nextIndex].id));
         break;
       // 随机播放
@@ -149,9 +149,20 @@ export default memo(function PlayBar() {
   const handleEnded = (e) => {
     // console.log('handleEnded');
     // console.log(e.target.currentTime);
-    handleNext()
+    handleNext();
   };
 
+  const handleListShow = (e) => {
+    setShowList(true)
+    setIsLocked(true)
+  };
+
+  const displayList = (e) => {
+    if (showList) {
+      return <DisplayPlayList />;
+    }
+    return null;
+  };
   return (
     <PlayBarWrapper
       show={isShow}
@@ -164,7 +175,7 @@ export default memo(function PlayBar() {
       }}
       onMouseLeave={() => setIsShow(false)}
     >
-      <DisplayPlayList/>
+      {displayList()}
       <div
         className='hand'
         // onClick={() => setIsShow(!isShow)}
@@ -198,7 +209,7 @@ export default memo(function PlayBar() {
             }
             onClick={handlePlay}
           ></div>
-          <div className='next btn playbar-spirit' onClick={(e)=> handleNext(e)}></div>
+          <div className='next btn playbar-spirit' onClick={(e) => handleNext(e)}></div>
         </div>
 
         <div className='play-info'>
@@ -239,7 +250,7 @@ export default memo(function PlayBar() {
         <div className='control'>
           <div className='volume icon playbar-spirit'></div>
           <div className='pattern one icon playbar-spirit'>单曲循环</div>
-          <div className='play-list'>
+          <div className='play-list' onClick={(e) => handleListShow(e)}>
             <div className='list icon playbar-spirit'>{list.length}</div>
           </div>
         </div>
