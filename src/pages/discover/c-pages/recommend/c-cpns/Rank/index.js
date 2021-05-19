@@ -2,19 +2,24 @@ import React, { memo } from 'react';
 
 import CommonHeader from '@/components/CommonHeader';
 import { RankWrapper, Content } from './style';
-import {  useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getSizedImage } from '../../../../../../utils';
-
+import { actions } from '@/components/PlayBar/store';
 // 从歌曲点详情的store 中导入 action
 // import { actions } from '@/pages/discover/c-pages/song-detail/store';
 // React-router-dom
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default memo(function Rank() {
+  const dispatch = useDispatch()
+  const audioRef = useSelector((state) => state.getIn(['playbar', 'audioRef']));
   const rankList = useSelector((state) => state.getIn(['recommend', 'rankList']));
   // 自定义函数
   const handlePlay = (track, index) => {
-    console.log("play")
+    console.log('play');
+    // console.log(audioRef);
+    // audioRef.play();
+    dispatch(actions.playAction(track.id));
   };
   return (
     <RankWrapper>
@@ -42,7 +47,7 @@ export default memo(function Rank() {
                   <div className='left'>
                     <span className={index < 3 ? 'index top' : 'index'}>{index + 1}</span>
                     <Link to={`/discover/song?id=${track.id}`}>
-                    <div className='name text-nowrap'>{track.name}</div>
+                      <div className='name text-nowrap'>{track.name}</div>
                     </Link>
                   </div>
                   <div className='controller-wrapper'>

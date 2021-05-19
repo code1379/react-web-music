@@ -25,7 +25,9 @@ export default memo(function Swiper() {
     carousel.current.next();
   };
   return (
-    <SwiperWrapper bg={banners.length && banners[currentIndex].imageUrl}>
+    <SwiperWrapper
+      bg={banners.length && banners[currentIndex] && banners[currentIndex].imageUrl}
+    >
       <Content className='wrap-v2'>
         <button
           className='btn prev banner-spirit'

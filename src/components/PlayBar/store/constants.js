@@ -1,0 +1,7 @@
+export const SET_AUDIO_REF = 'playbar/SET_AUDIO_REF';
+
+export const CHANGE_CURRENT_SONG_ID = 'playbar/CHANGE_CURRENT_SONG_ID';
+export const CHANGE_CURRENT_SONG_DETAIL = 'playbar/CHANGE_CURRENT_SONG_DETAIL';
+
+
+export const ADD_SONGDETAIL_TO_PLAY_LIST = 'playbar/ADD_SONGDETAIL_TO_PLAY_LIST';
